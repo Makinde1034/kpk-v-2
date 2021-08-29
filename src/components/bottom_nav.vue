@@ -20,7 +20,7 @@
                     </button>
                 </form>
             </div>
-            <p @click="logOut" v-if="token" class="logout">logout</p>
+            <p @click="logUserOut" v-if="token" class="logout">logout</p>
             <router-link v-if="!token" to="/signup">Sign up</router-link>
             <router-link v-if="!token" to="/signin">Log in</router-link>
             <p v-if="token">{{userDetails.first_name}}</p>
@@ -36,13 +36,16 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapState,mapActions} from 'vuex'
 import storage from '../utils/storage.js'
 
 export default {
     
     methods:{
-        
+        ...mapActions('auth',['logOut']),
+        logUserOut(){
+            this.logOut()
+        }
         
     },
     computed:{

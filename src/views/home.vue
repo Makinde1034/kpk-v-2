@@ -10,19 +10,23 @@
         <p class="product__box__desc">{{product.description.length > 35 ? product.description.substring(0,35) + '...' : item.description}}</p>
         <h3>${{product.price}}</h3>
         <div class="itemBox__button">
-          <button @click="addToCart(item.id)" >ADD TO CART</button>
+          <button @click="addProductToCart(product)" >ADD TO CART</button>
         </div>
       </div>
         
     </div>
+    <Toast />
   </div>
 </template>
 
 <script>
 import {mapActions,mapState} from 'vuex'
 import Loader from '../components/loader.vue'
+import storage from '../utils/storage.js'
+import Toast from '../components/toast.vue'
+
 export default {
-  components:{Loader},
+  components:{Loader,Toast},
   data(){
     return {
 
@@ -32,11 +36,30 @@ export default {
   computed:{
     ...mapState({
       products : (state) => state.products.products,
-      loading : (state) => state.products.loading
-    })
+      loading : (state) => state.products.loading,
+      status : (state) => state.cart.status
+    }),
+    
   },
   methods:{
-    ...mapActions('products',['getProducts'])
+    ...mapActions('products',['getProducts']),
+    ...mapActions('cart',['addToCart']),
+
+    addProductToCart(product){
+      // const payload = {
+      //   product_id : id
+      // }
+      if(!storage.getUserDetails()){
+        // this.$toast.show(`you have to be logged in to add items to cart`);
+        alert('you have to be logged in to add products to cart')
+      }
+      else{
+        // this.$store.dispatch('cart/addToCart',payload);
+        this.addToCart(product)
+      }
+     
+    },
+    
   },
   created(){
     this.getProducts()

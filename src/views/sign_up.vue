@@ -22,17 +22,19 @@
                 <input required v-model="confirmPassword" placeholder="Confirm password" type="text">
             </div>
             <div class="submit">
-            <button :disabled='isLoading'>
-                <p v-if="loading===false">Submit</p>
-                <div v-else class="loader"></div>
-            </button>
-        </div>
+                <button :disabled='isLoading'>
+                    <p v-if="loading===false">Submit</p>
+                    <div v-else class="loader"></div>
+                </button>
+            </div>
+            <p class="error" v-if="status==='error'">An error occured, try again</p>
       </form>
     </div>
 </template>
 
 <script>
 import {mapActions,mapState} from 'vuex'
+import storage from '../utils/storage.js'
 
 export default {
     data(){
@@ -80,10 +82,17 @@ export default {
     },
     computed:{
         ...mapState({
-            loading : (state) => state.auth.loading
+            loading : (state) => state.auth.loading,
+            status : (state) => state.auth.status
         }),
         isLoading(){
             return this.loading
+        }
+    },
+    mounted(){
+        const token = storage.getToken()
+        if(token){
+            this.$router.push("/")
         }
     }
 }
@@ -181,5 +190,11 @@ export default {
 .rr span {
     color: red;
     font-size: 12px;
+}
+
+.error{
+    text-align: center;
+    font-size: 12px;
+    color: red;
 }
 </style>

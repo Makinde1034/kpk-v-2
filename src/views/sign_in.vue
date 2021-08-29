@@ -1,22 +1,62 @@
 <template>
-  <div class="signIn">
-      <form action="">
-          <label for="">Email</label>
-          <input placeholder="hello@gmail.com" type="text">
-          <label for="">Password</label>
-          <input placeholder="Password" type="text">
-          <button>Login</button>
-      </form>
-  </div>
+    <div class="signIn">
+        <form @submit.prevent="signUserIn" >
+            <label for="Email">Email</label>
+            <input required v-model="userDetails.email" placeholder="hello@gmail.com" type="text">
+            <label for="Password">Password</label>
+            <input required v-model="userDetails.password" placeholder="Password" type="text">
+            <button :disabled='isLoading'>
+                <p v-if="loading===false">Submit</p>
+                <div v-else class="loader"></div>
+            </button>
+            <p class="error" v-if="status==='error'">An error occured, try again</p>
+        </form>
+    </div>
 </template>
 
 <script>
-export default {
+import {mapActions,mapState} from 'vuex'
+import storage from '../utils/storage.js'
 
+export default {
+    data(){
+        return {
+            userDetails:{
+                email : '',
+                password:"",
+            
+            }
+        }
+    },
+    methods:{
+        ...mapActions('auth',['signIn']),
+
+        signUserIn(){
+            this.signIn(this.userDetails)
+        }
+
+    },
+    computed:{
+        ...mapState({
+            loading : (state) => state.auth.signInLoading,
+            status : (state) => state.auth.status
+            
+        }),
+        isLoading(){
+            return this.loading
+        }
+        
+    },
+    mounted(){
+        const token = storage.getToken()
+        if(token){
+            this.$router.push("/")
+        }
+    }
 }
 </script>
 
-<style>
+<style scoped>
 .signIn{
     display: flex;
     justify-content: center;
@@ -51,5 +91,24 @@ export default {
     color: white;
     font-weight: 500;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader{
+    height: 20px;
+    width: 18px;
+    border-radius: 50%;
+    background: #102A55;
+    border: 3px solid #102A55;
+    border-top: 3px solid white;
+    animation: load 0.5s linear infinite;
+}
+
+.error{
+    text-align: center;
+    color: red;
+    font-size: 12px;
 }
 </style>
