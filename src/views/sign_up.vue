@@ -99,7 +99,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .signUp{
     display: flex;
     flex-direction: column;
