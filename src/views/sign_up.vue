@@ -29,6 +29,7 @@
             </div>
             <p class="error" v-if="status==='error'">An error occured, try again</p>
       </form>
+      <router-link to="signin">No account ? log in</router-link>
     </div>
 </template>
 
@@ -101,6 +102,7 @@ export default {
 <style>
 .signUp{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding-top: 50px;
@@ -196,5 +198,12 @@ export default {
     text-align: center;
     font-size: 12px;
     color: red;
+}
+
+a{
+    margin-top: 15px;
+    font-size: 14px;
+    color: black;
+    text-decoration: none;
 }
 </style>

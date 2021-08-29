@@ -11,6 +11,7 @@
             </button>
             <p class="error" v-if="status==='error'">An error occured, try again</p>
         </form>
+        <router-link to="/signup">Already have an account ? sign in</router-link>
     </div>
 </template>
 
@@ -30,6 +31,7 @@ export default {
     },
     methods:{
         ...mapActions('auth',['signIn']),
+        ...mapActions('cart',['getCart']),
 
         signUserIn(){
             this.signIn(this.userDetails)
@@ -48,17 +50,20 @@ export default {
         
     },
     mounted(){
+
         const token = storage.getToken()
         if(token){
             this.$router.push("/")
         }
-    }
+    },
+    
 }
 </script>
 
 <style scoped>
 .signIn{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding-top: 100px;
@@ -110,5 +115,12 @@ export default {
     text-align: center;
     color: red;
     font-size: 12px;
+}
+
+a{
+    margin-top: 15px;
+    font-size: 14px;
+    color: black;
+    text-decoration: none;
 }
 </style>

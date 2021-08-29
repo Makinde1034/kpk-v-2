@@ -5,9 +5,12 @@ const cart = {
     namespaced:true,
     state(){
         return {
+            cartItems:[],
             status:"",
             toastMsg:"",
-            showToast:false
+            showToast:false,
+            total :"",
+            delivery : ""
         }
     },
     getters:{
@@ -15,21 +18,43 @@ const cart = {
     },
     actions:{
 
-        addToCart({commit},product){
+        addToCart({commit,dispatch},product){
             const payload = {
                 product_id : product.id
             }
             api.addToCart(payload).then((res)=>{
             console.log(res)
-            // dispatch("getCart");
             commit('setToastMsg',product)
             commit("success")
             commit("showToast")
-            // dispatch('getCart')
+            dispatch("getCart")
             }).catch((err)=>{
                 alert(err)
             })
         },
+        getCart({commit}){
+            api.getCart().then((res)=>{
+                const{data:{data}} = res
+                const totalPrice = data.cart.total_price
+                const delivery = data.cart.dispatch
+                console.log(data.cart);
+                commit('setCart',data.cart.items);
+                commit('setTotalPrice',totalPrice)
+                commit('setDelivery',delivery)
+            })
+        },
+        deleteFromCart({dispatch},payload){
+            api.deleteFromCart(payload).then((res)=>{
+                console.log(res);
+                dispatch('getCart')
+            })
+        },
+        removeFromCart({dispatch},payload){
+            api.removeFromCart(payload).then((res)=>{
+                console.log(res)
+                dispatch('getCart')
+            })
+        }
         
     },
     mutations:{
@@ -45,6 +70,15 @@ const cart = {
                 state.showToast = false
             },3000);
         
+        },
+        setCart(state,payload){
+            state.cartItems = payload
+        },
+        setTotalPrice(state,payload){
+            state.total = payload
+        },
+        setDelivery(state,payload){
+            state.delivery = payload
         }
     }
 }

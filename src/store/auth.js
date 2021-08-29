@@ -33,7 +33,7 @@ const auth = {
                 console.log(err)
             })
         },
-        signIn({commit},user){
+        signIn({commit,dispatch},user){
             commit('signInAuthRequest')
             api.signIn(user).then((res)=>{
                 const {data:{data}} = res
@@ -43,18 +43,20 @@ const auth = {
                 storage.setToken(token)
                 storage.setUserDetails(user);
                 commit('authSuccess',token)
-                // dispatch('cart/getCart',null,{ root: true }) 
+                dispatch('cart/getCart',null,{ root: true }) 
                 router.push('/')
             }).catch((err)=>{
                 console.log(err)
                 commit('authError')
             })
         },
-        logOut({commit}){
+        logOut({commit,dispatch}){
             localStorage.removeItem('token');
             localStorage.removeItem('user');
             commit('logOut');
-            // dispatch('cart/getCart',null,{ root: true }) 
+            router.push("signin")
+            // dispatch('products/getProducts',null,{ root: true }) 
+            dispatch('cart/getCart',null,{ root: true })
         },
     },
     mutations:{

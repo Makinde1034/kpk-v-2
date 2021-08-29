@@ -46,15 +46,10 @@ export default {
     ...mapActions('cart',['addToCart']),
 
     addProductToCart(product){
-      // const payload = {
-      //   product_id : id
-      // }
       if(!storage.getUserDetails()){
-        // this.$toast.show(`you have to be logged in to add items to cart`);
-        alert('you have to be logged in to add products to cart')
+        this.$toast.show('You have to be logged in before adding products to cart')
       }
       else{
-        // this.$store.dispatch('cart/addToCart',payload);
         this.addToCart(product)
       }
      
@@ -103,6 +98,7 @@ export default {
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
   padding: 10px;
+  color: #102A55;
 }
 
 .product__box:hover .itemBox__button button{

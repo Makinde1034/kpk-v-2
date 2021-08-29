@@ -24,13 +24,18 @@
             <router-link v-if="!token" to="/signup">Sign up</router-link>
             <router-link v-if="!token" to="/signin">Log in</router-link>
             <p v-if="token">{{userDetails.first_name}}</p>
-            <div @click="openCart" class="nav__cart">
-                <p>Cart</p>
-                <div  class="cart__counter">
-                    <img src="../assets/trolley.d9c304ca.svg" alt="">
-                    <div class="circle"></div>
-                </div>
-            </div>
+            <router-link to="cart">
+                <div @click="openCart" class="nav__cart">
+                    <p>Cart</p>
+                    <div  class="cart__counter">
+                        <img src="../assets/trolley.d9c304ca.svg" alt="">
+                        <div class="circle">
+                            <p>{{cartItems.length}}</p>
+                        </div>
+                    </div>
+                </div>  
+            </router-link>
+            
       </nav>
   </div>
 </template>
@@ -43,19 +48,27 @@ export default {
     
     methods:{
         ...mapActions('auth',['logOut']),
+        ...mapActions('products',['getProducts']),
+        ...mapActions('cart',['getCart']),
+
         logUserOut(){
             this.logOut()
+            this.getProducts()
         }
         
     },
     computed:{
         ...mapState({
-            token : (state) => state.auth.token
+            token : (state) => state.auth.token,
+            cartItems : (state) => state.cart.cartItems
         }),
         userDetails(){
             return storage.getUserDetails()
         }
     
+    },
+    created(){
+        this.getCart()
     }
 }
 </script>
@@ -146,6 +159,10 @@ export default {
     align-items: center;
     margin-left: 10px;
     /* position: relative; */
+}
+
+.circle p{
+    font-size: 10px;
 }
 
 .cart__counter img{
