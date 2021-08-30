@@ -8,7 +8,7 @@
                     <div class="line middle-line"></div>
                     <div class="line"></div>
                 </div>
-                <h3>KPK</h3>
+                <router-link class="logo" to="/">KPK</router-link>
                 <img src="../assets/trolley.d9c304ca.svg" alt="">
             </div>
 
@@ -23,7 +23,7 @@
             <p @click="logUserOut" v-if="token" class="logout">logout</p>
             <router-link v-if="!token" to="/signup">Sign up</router-link>
             <router-link v-if="!token" to="/signin">Log in</router-link>
-            <p v-if="token">{{userDetails.first_name}}</p>
+            <p v-if="token">Hi {{userDetails.first_name}}</p>
             <router-link to="cart">
                 <div @click="openCart" class="nav__cart">
                     <p>Cart</p>
@@ -88,6 +88,10 @@ export default {
 .nav__logo{
     display: flex;
     align-items: center;
+}
+
+.logo{
+    font-size: 25px;
 }
 
 .menu{

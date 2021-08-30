@@ -5,7 +5,7 @@
                 <img :src="item.image" alt="">
             </div>
             <div class="productBox__details">
-                <p>{{item.name}}</p>
+                <p class="name">{{item.name}}</p>
                 <p>{{item.description.length > 30 ? item.description.substring(0,30) + '...' : item.description}}</p>
             </div>
             <div class="productBox__quantity">
@@ -87,12 +87,28 @@ export default {
 
 <style scoped>
 .cart{
-    height: 90vh;
+    height: 80vh;
     background: #E8EFFA;
     padding-left: 150px;
     padding-right: 150px;
     padding-top: 50px;
     overflow: auto;
+    padding-bottom: 100px;
+}
+
+.cart::-webkit-scrollbar {
+  width: 0px;
+}
+
+
+ 
+.cart::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+.cart::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
 }
 
 
@@ -108,6 +124,10 @@ export default {
     padding-left: 50px;
     padding-right: 50px;
     margin-bottom: 30px;
+}
+
+.name{
+    font-weight: 500;
 }
 
 .productBox__img{
@@ -167,5 +187,9 @@ export default {
 
 .total span {
     font-weight: 700;
+}
+
+label{
+    font-weight: 500;
 }
 </style>

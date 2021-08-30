@@ -11,7 +11,7 @@
             </button>
             <p class="error" v-if="status==='error'">An error occured, try again</p>
         </form>
-        <router-link to="/signup">Already have an account ? sign in</router-link>
+        <router-link to="/signup">Already have an account ? sign up</router-link>
     </div>
 </template>
 

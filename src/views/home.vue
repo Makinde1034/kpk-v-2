@@ -75,6 +75,7 @@ export default {
   padding-right: 150px;
   /* background: red; */
   padding-top: 50px;
+  padding-bottom: 50px;
   background: #E8EFFA;
 }
 .container {
