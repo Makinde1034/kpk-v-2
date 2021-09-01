@@ -50,5 +50,6 @@ export default {
     visibility: visible;
     opacity: 1;
      transform: translate(-50%,-50%) translateY(0px);
+     z-index: 10;
 }
 </style>

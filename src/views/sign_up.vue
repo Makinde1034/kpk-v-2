@@ -84,7 +84,7 @@ export default {
     computed:{
         ...mapState({
             loading : (state) => state.auth.loading,
-            status : (state) => state.auth.status
+            status : (state) => state.auth.status,
         }),
         isLoading(){
             return this.loading
@@ -106,6 +106,8 @@ export default {
     justify-content: center;
     align-items: center;
     padding-top: 50px;
+    background: #E8EFFA;
+    height: 80vh;
 }
 
 .signUp form{
@@ -205,5 +207,15 @@ a{
     font-size: 14px;
     color: black;
     text-decoration: none;
+}
+
+@media screen and (max-width:768px){
+    .signUp{
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .signUp form{
+        width: 100%;
+    }
 }
 </style>

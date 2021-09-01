@@ -100,8 +100,8 @@ export default {
 }
 
 .line{
-    height: 4px;
-    width: 30px;
+    height: 3px;
+    width: 25px;
     background: white;
     border-radius: 3px;
 }
@@ -131,6 +131,15 @@ export default {
     outline: none;
 }
 
+.nav__search button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav__search button img{
+    height: 20px;
+}
 .login{
     cursor: pointer;
 }

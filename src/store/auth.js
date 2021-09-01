@@ -47,7 +47,7 @@ const auth = {
                 router.push('/')
             }).catch((err)=>{
                 console.log(err)
-                commit('authError')
+                commit('authError',)
             })
         },
         logOut({commit,dispatch}){

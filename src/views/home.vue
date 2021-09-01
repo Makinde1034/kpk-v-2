@@ -5,8 +5,8 @@
     </div>
     <div v-else class="container">
       <div class="product__box" v-for="product in products" :key="product.name">
-        <img class="image" :src="product.image" alt="">
-        <p class="product__box__name">{{product.name}}</p>
+        <img @click="goToDetails(product.id)" class="image" :src="product.image" alt="">
+        <p @click="goToDetails(product.id)" class="product__box__name">{{product.name}}</p>
         <p class="product__box__desc">{{product.description.length > 35 ? product.description.substring(0,35) + '...' : item.description}}</p>
         <h3>${{product.price}}</h3>
         <div class="itemBox__button">
@@ -15,7 +15,6 @@
       </div>
         
     </div>
-    <Toast />
   </div>
 </template>
 
@@ -23,10 +22,10 @@
 import {mapActions,mapState} from 'vuex'
 import Loader from '../components/loader.vue'
 import storage from '../utils/storage.js'
-import Toast from '../components/toast.vue'
+
 
 export default {
-  components:{Loader,Toast},
+  components:{Loader},
   data(){
     return {
 
@@ -54,6 +53,9 @@ export default {
       }
      
     },
+    goToDetails(productId){
+      this.$router.push({name:"details",params:{id:productId}})
+    }
     
   },
   created(){
@@ -100,6 +102,7 @@ export default {
   box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
   padding: 10px;
   color: #102A55;
+  cursor: pointer;
 }
 
 .product__box:hover .itemBox__button button{
@@ -146,6 +149,32 @@ export default {
   transition: 0.2s;
   transform: scale(0.5);
   opacity: 0;
+}
+
+@media screen and (max-width:768px){
+  .home{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+  }
+
+  .product__box{
+    width: 80%;
+    height: auto;
+    padding-bottom: 30px;
+  }
+
+  .itemBox__button button{
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 </style>

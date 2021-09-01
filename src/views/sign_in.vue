@@ -4,7 +4,7 @@
             <label for="Email">Email</label>
             <input required v-model="userDetails.email" placeholder="hello@gmail.com" type="text">
             <label for="Password">Password</label>
-            <input required v-model="userDetails.password" placeholder="Password" type="text">
+            <input required v-model="userDetails.password" placeholder="Password" type="password">
             <button :disabled='isLoading'>
                 <p v-if="loading===false">Submit</p>
                 <div v-else class="loader"></div>
@@ -64,9 +64,11 @@ export default {
 .signIn{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     padding-top: 100px;
+    background: #E8EFFA;
+    height: 80vh;
 }
 
 .signIn form{
@@ -115,6 +117,7 @@ export default {
     text-align: center;
     color: red;
     font-size: 12px;
+    margin-top: 5px;
 }
 
 a{
@@ -122,5 +125,15 @@ a{
     font-size: 14px;
     color: black;
     text-decoration: none;
+}
+
+@media screen and (max-width:768px){
+    .signIn{
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .signIn form{
+        width: 100%;
+    }
 }
 </style>
