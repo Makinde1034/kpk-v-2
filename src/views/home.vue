@@ -172,6 +172,7 @@ export default {
     width: 80%;
     height: auto;
     padding-bottom: 30px;
+    margin-bottom: 30px;
   }
 
   .itemBox__button button{
