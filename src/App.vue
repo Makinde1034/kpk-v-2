@@ -3,6 +3,7 @@
     <TopNav />
     <BottomNav />
     <Toast />
+    <SideNav />
     <router-view />
   </div>
 </template>
@@ -11,10 +12,11 @@
 import TopNav from './components/top_nav.vue'
 import BottomNav from './components/bottom_nav.vue'
 import Toast from './components/toast.vue'
+import SideNav from './components/side_nav.vue'
 export default {
   name: 'App',
   components: {
-    TopNav,BottomNav,Toast
+    TopNav,BottomNav,Toast,SideNav
   }
 }
 </script>

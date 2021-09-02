@@ -127,6 +127,7 @@ export default {
     border: 1px solid #102A55;
     border-radius: 5px;
     padding-left: 20px;
+    outline: none;
 }
 .address{
     justify-content: space-between;
@@ -140,6 +141,7 @@ export default {
     border: 1px solid #102A55;
     border-radius: 5px;
     padding-left: 20px;
+    outline: none;
 }
 
 .submit{

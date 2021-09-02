@@ -3,7 +3,7 @@
         <nav class="nav">
             
             <div class="nav__logo">
-                <div class="menu">
+                <div @click="toggleSideNav" class="menu">
                     <div class="line"></div>
                     <div class="line middle-line"></div>
                     <div class="line"></div>
@@ -21,12 +21,12 @@
                 </form>
             </div>
             <p @click="logUserOut" v-if="token" class="logout">logout</p>
-            <router-link v-if="!token" to="/signup">Sign up</router-link>
-            <router-link v-if="!token" to="/signin">Log in</router-link>
-            <p v-if="token">Hi {{userDetails.first_name}}</p>
+            <router-link class="nav__signup" v-if="!token" to="/signup">Sign up</router-link>
+            <router-link class="nav__signin" v-if="!token" to="/signin">Log in</router-link>
+            <p class="hi" v-if="token">Hi {{userDetails.first_name}}</p>
             <router-link to="cart">
                 <div @click="openCart" class="nav__cart">
-                    <p>Cart</p>
+                    <p class="nav__cart__para">Cart</p>
                     <div  class="cart__counter">
                         <img src="../assets/trolley.d9c304ca.svg" alt="">
                         <div class="circle">
@@ -50,10 +50,14 @@ export default {
         ...mapActions('auth',['logOut']),
         ...mapActions('products',['getProducts']),
         ...mapActions('cart',['getCart']),
+        ...mapActions('mobile',['toggleMobileNav']),
 
         logUserOut(){
             this.logOut()
             this.getProducts()
+        },
+        toggleSideNav(){
+            this.toggleMobileNav()
         }
         
     },
@@ -83,6 +87,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     color: white;
+    z-index: 5;
 }
 
 .nav__logo{
@@ -215,6 +220,14 @@ a{
         display: block;
     }
 
+    .logo{
+        font-size: 20px;
+    }
+
+    .nav__logo img{
+        height: 20px;
+    }
+
     .login{
         display: none;
     }
@@ -228,7 +241,15 @@ a{
         border: none;
     }
 
-    .nav__cart p{
+    .nav__cart__para {
+        display: none;
+    }
+
+    .hi{
+        display: none;
+    }
+
+    .nav__signin,.nav__signup{
         display: none;
     }
 

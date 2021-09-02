@@ -43,6 +43,7 @@ export default {
   methods:{
     ...mapActions('products',['getProducts']),
     ...mapActions('cart',['addToCart']),
+    ...mapActions('mobile',['closeMobileNav']),
 
     addProductToCart(product){
       if(!storage.getUserDetails()){
@@ -60,6 +61,9 @@ export default {
   },
   created(){
     this.getProducts()
+  },
+  mounted(){
+    this.closeMobileNav()
   }
   
 }

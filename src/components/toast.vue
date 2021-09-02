@@ -43,6 +43,7 @@ export default {
 
 .toast p{
     font-weight: 600;
+    text-align: center;
 
 }
 

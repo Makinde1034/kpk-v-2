@@ -6,7 +6,7 @@
             </div>
             <div class="productBox__details">
                 <p class="name">{{item.name}}</p>
-                <p>{{item.description.length > 30 ? item.description.substring(0,30) + '...' : item.description}}</p>
+                <p class="desc">{{item.description.length > 30 ? item.description.substring(0,30) + '...' : item.description}}</p>
             </div>
             <div class="productBox__quantity">
                 <label for="">Quantity</label>
@@ -29,8 +29,11 @@
             </div>
         </div>
         <div v-if="cartItems.length > 0" class="total">
-            <p>Total amount : <span>${{total}}</span></p>
-            <p>Delivery fee : <span>${{deliveryFee}}</span></p>
+            <p>Total amount : <span>${{total.toLocaleString()}}</span></p>
+            <p>Delivery fee : <span>${{deliveryFee.toLocaleString()}}</span></p>
+        </div>
+        <div v-if="cartItems.length > 0" class="checkout">
+            <button>Checkout</button>
         </div>
     </div>
 </template>
@@ -189,7 +192,89 @@ export default {
     font-weight: 700;
 }
 
+.checkout{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.checkout button{
+    height: 40px;
+    width: 200px;
+    border: none;
+    background: rgb(109, 209, 109);
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
 label{
     font-weight: 500;
+}
+
+@media screen and (max-width:768px) {
+    .cart{
+        padding-left: 20px;
+        padding-right: 20px;
+        
+    }
+
+    .productBox{
+        flex-direction: column;
+        height: auto;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .name{
+        text-align: center;
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    .desc{
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .productBox__quantity{
+        margin-bottom: 5px;
+        margin-top: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .productBox__quantity label{
+        font-size: 20px;
+    }
+
+    .unitPrice{
+        margin-bottom: 5px;
+        margin-top: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .unitPrice label, .subPrice label{
+        font-size: 20px;
+    }
+
+    .quantity__img{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .quantity__img img{
+        height: 30px;
+    }
+
+    .delete img{
+        height: 30px;
+    }
 }
 </style>

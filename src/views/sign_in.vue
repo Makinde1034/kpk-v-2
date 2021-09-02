@@ -32,6 +32,7 @@ export default {
     methods:{
         ...mapActions('auth',['signIn']),
         ...mapActions('cart',['getCart']),
+        ...mapActions('mobile',['closeMobileNav']),
 
         signUserIn(){
             this.signIn(this.userDetails)
@@ -50,7 +51,7 @@ export default {
         
     },
     mounted(){
-
+        this.closeMobileNav()
         const token = storage.getToken()
         if(token){
             this.$router.push("/")
@@ -68,7 +69,7 @@ export default {
     align-items: center;
     padding-top: 100px;
     background: #E8EFFA;
-    height: 80vh;
+    height: 90vh;
 }
 
 .signIn form{
@@ -88,6 +89,7 @@ export default {
     border: 1px solid #102A55;
     border-radius: 5px;
     padding-left: 20px;
+    outline: none;
 }
 
 .signIn form button{
