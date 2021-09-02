@@ -96,6 +96,7 @@ export default {
     ". . . .";
   width: 100%;
   height: 101%;
+  user-select: none;
 }
 
 
@@ -173,6 +174,7 @@ export default {
     height: auto;
     padding-bottom: 30px;
     margin-bottom: 70px;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .itemBox__button button{
