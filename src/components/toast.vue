@@ -1,7 +1,8 @@
 <template>
-  <div  :class="showToast ? ['toast','toast--active'] : 'toast' ">
+    <div  :class="showToast ? ['toast','toast--active'] : 'toast' ">
+      <img src="../assets/check.png" alt="">
       <p>{{toastMsg}}</p>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -39,6 +40,12 @@ export default {
     opacity: 0;
     transition: 0.5s;
     border: 1px solid black;
+    display: flex;
+    align-items: center;
+}
+
+.toast img{
+    height: 20px;
 }
 
 .toast p{
