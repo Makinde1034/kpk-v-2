@@ -101,4 +101,8 @@ export default {
     margin-top: 20px;
     cursor: pointer;
 }
+
+@media screen and (max-wi) {
+    
+}
 </style>

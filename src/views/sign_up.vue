@@ -61,6 +61,7 @@ export default {
     
     methods:{
         ...mapActions('auth',['signUp']),
+        ...mapActions('mobile',['closeMobileNav']),
 
         signUpUser(){
             
@@ -91,6 +92,7 @@ export default {
         }
     },
     mounted(){
+        this.closeMobileNav()
         const token = storage.getToken()
         if(token){
             this.$router.push("/")
@@ -107,7 +109,7 @@ export default {
     align-items: center;
     padding-top: 50px;
     background: #E8EFFA;
-    height: 80vh;
+    height: 90vh;
 }
 
 .signUp form{

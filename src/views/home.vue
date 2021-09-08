@@ -10,7 +10,10 @@
         <p class="product__box__desc">{{product.description.length > 35 ? product.description.substring(0,35) + '...' : item.description}}</p>
         <h3>${{product.price}}</h3>
         <div class="itemBox__button">
-          <button @click="addProductToCart(product)" >ADD TO CART</button>
+          <button @click="addProductToCart(product)" >
+            <p v-if="requestLoading === false">ADD TO CART</p>
+            <div v-else class="loader"></div>
+          </button>
         </div>
       </div>
         
@@ -36,7 +39,8 @@ export default {
     ...mapState({
       products : (state) => state.products.products,
       loading : (state) => state.products.loading,
-      status : (state) => state.cart.status
+      status : (state) => state.cart.status,
+      requestLoading : (state) => state.cart.requestLoading
     }),
     
   },
@@ -69,7 +73,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .loading__container{
   height: 80vh;
   display: flex;
@@ -142,7 +146,8 @@ export default {
 }
 
 .itemBox__button button{
-  padding: 7px 20px;
+  width: 100px;
+  padding: 8px;
   background: #102A55;
   border: none;
   color: white;
@@ -154,6 +159,28 @@ export default {
   transition: 0.2s;
   transform: scale(0.5);
   opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader{
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background: #102A55;
+  border: 3px solid #102A55;
+  border-top: 3px solid white;
+  animation: load 0.5s linear infinite;
+}
+
+@keyframes load {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
 }
 
 @media screen and (max-width:768px){

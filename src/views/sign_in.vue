@@ -115,6 +115,15 @@ export default {
     animation: load 0.5s linear infinite;
 }
 
+@keyframes load {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+
 .error{
     text-align: center;
     color: red;

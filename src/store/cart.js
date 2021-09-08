@@ -10,7 +10,8 @@ const cart = {
             toastMsg:"",
             showToast:false,
             total :"",
-            delivery : ""
+            delivery : "",
+            requestLoading : false                                  
         }
     },
     getters:{
@@ -19,6 +20,7 @@ const cart = {
     actions:{
 
         addToCart({commit,dispatch},product){
+            commit("addToCartRequest")
             const payload = {
                 product_id : product.id
             }
@@ -60,6 +62,7 @@ const cart = {
     mutations:{
         success(state){
             state.status = 'success'
+            state.requestLoading = false
         },
         setToastMsg(state,product){
             state.toastMsg = `Added ${product.name} to cart`
@@ -79,6 +82,10 @@ const cart = {
         },
         setDelivery(state,payload){
             state.delivery = payload
+        },
+
+        addToCartRequest(state){
+            state.requestLoading = true
         }
     }
 }

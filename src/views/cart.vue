@@ -33,7 +33,16 @@
             <p>Delivery fee : <span>${{deliveryFee.toLocaleString()}}</span></p>
         </div>
         <div v-if="cartItems.length > 0" class="checkout">
-            <button>Checkout</button>
+            <!-- <paystack
+                :amount="amount * 100"
+                :email="email"
+                :paystackkey="pk_test_32790e305ae107adeffe82852547a8aad04197e7"
+                :reference="reference"
+                :callback="processPayment"
+                :close="close"
+            >
+                Make Payment
+            </paystack> -->
         </div>
     </div>
 </template>
@@ -41,8 +50,10 @@
 <script>
 import {mapState,mapActions} from 'vuex'
 import storage from '../utils/storage.js'
+// import paystack from 'vue-paystack'
 
 export default {
+    // components:{paystack},
     data(){
         return {
 
@@ -206,6 +217,7 @@ export default {
     color: white;
     font-weight: bold;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 label{
